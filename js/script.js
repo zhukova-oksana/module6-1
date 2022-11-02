@@ -26,16 +26,20 @@
   const inputControl = () => {
     const input = document.querySelector('.information__input');
     const elementText = document.querySelector('.information__text');
-    input.addEventListener('change', e => {
-      const target = e.target;
+    let timeout;
 
-      setTimeout(() => {
-        elementText.textContent = target.value;
+    const inputText = () => {
+      let text = input.value;
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+      timeout = setTimeout(() => {
+        elementText.textContent = text;
       }, 300);
+    }
 
-    });
+    input.addEventListener('input', inputText);
 
-    return elementText;
   }
 
   const init = () => {
